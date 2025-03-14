@@ -29,23 +29,32 @@
 
 
 
-### Comandos basicos 
+### Comandos basicos para arrancar el proyecto
 
+
+crear el entorno virtual:
+    - python3 -m venv env
+
+activar el entorno virtual:
+    - source env/bin/activate
+
+instalar las dependencias:
+    - pip install -r requirements.txt
+
+
+crear la base de datos:
+    - python manage.py migrate
+
+crear el superusuario:
+    - python manage.py createsuperuser
 
 arrancar el server:
     - python manage.py runserver 
 
-migraciones:
-    - python manage.py makemigrations
-    - python manage.py migrate
 
 
-### Agregar un archivo .env con las configuraciones basicas de la base de datos preferida 
+### TESTING
 
-ejemplo: 
 
-    DB_NAME = todo 
-    DB_USER = your_user
-    DB_PASSWORD = your_password
-    DB_HOST = localhost
-    DB_PORT = 5432
+- python manage.py test
+
