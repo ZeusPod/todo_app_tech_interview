@@ -31,7 +31,7 @@ class TaskDetailView(DetailView):
             if 'error' in weather_data:
                 context['weather_error'] = weather_data['error']
             else:
-                context['temperature'] = weather_data['main']['temp']
+                context['temperature'] = round(weather_data['main']['temp'] - 273.15, 2)
                 context['humidity'] = weather_data['main']['humidity']
                 context['weather_description'] = weather_data['weather'][0]['description']
         return context
