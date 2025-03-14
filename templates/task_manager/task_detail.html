@@ -3,23 +3,36 @@
 {% block title %}Detalle de Tarea{% endblock %}
 
 {% block content %}
-    <h2>Detalle de la Tarea</h2>
-    <p><strong>Título:</strong> {{ task.title }}</p>
-    <p><strong>Descripción:</strong> {{ task.description }}</p>
-    <p><strong>Fecha de Creación:</strong> {{ task.created_at }}</p>
-    <p><strong>Fecha de Vencimiento:</strong> {{ task.due_date }}</p>
-    
-    {% if task.completed %}
-        <p><strong>Completada:</strong> Si</p>
-    {% else %}
-        <p><strong>Completada:</strong> No</p>
-    {% endif %}
-    {% if task.city %}
-        <p><strong>Localidad:</strong> {{ task.city }}</p>
-        <p><strong>Temperatura:</strong> {{ temperature }} °C</p>
-        <p><strong>Humedad:</strong> {{ humidity }} %</p>
-        <p><strong>Descripción del Clima:</strong> {{ weather_description }}</p>        
-    {% endif %}
-    <a href="{% url 'task_list' %}" class="btn btn-secondary">Volver a la lista</a>
-    <a href="{% url 'update_task' task.id %}" class="btn btn-primary">Editar</a>
+<div class="d-flex justify-content-center">
+    <div class="card shadow-lg p-4" style="width: 40rem;">
+        <div class="card-body">
+            <h2 class="card-title text-center">Detalle de la Tarea</h2>
+            <hr>
+            <p><strong>Título:</strong> {{ task.title }}</p>
+            <p><strong>Descripción:</strong> {{ task.description }}</p>
+            <p><strong>Fecha de Creación:</strong> {{ task.created_at }}</p>
+            <p><strong>Fecha de Vencimiento:</strong> {{ task.due_date }}</p>
+            
+            <p><strong>Completada:</strong> 
+                <span class="badge {% if task.completed %}bg-success{% else %}bg-danger{% endif %}">
+                    {% if task.completed %}Sí{% else %}No{% endif %}
+                </span>
+            </p>
+            
+            {% if task.city %}
+                <hr>
+                <h5>Información del Clima</h5>
+                <p><strong>Localidad:</strong> {{ task.city }}</p>
+                <p><strong>Temperatura:</strong> {{ temperature }} °C</p>
+                <p><strong>Humedad:</strong> {{ humidity }} %</p>
+                <p><strong>Descripción del Clima:</strong> {{ weather_description }}</p>
+            {% endif %}
+            
+            <div class="d-flex justify-content-between mt-3">
+                <a href="{% url 'task_list' %}" class="btn btn-secondary">Volver a la lista</a>
+                <a href="{% url 'update_task' task.id %}" class="btn btn-primary">Editar</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
