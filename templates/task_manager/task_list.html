@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+<h1 class="text-center mt-4 mb-5">Tareas</h1>
+
+<div class="row mx-4 mb-4">
+    <div class="col">
+        <a href="{% url 'create_task' %}" class="btn btn-primary">Crear Tarea</a>
+    </div>
+</div>
+
+<div class="row mx-4 mb-4">
+    {% for t in tasks %}
+    <div class="col-12 col-md-6 col-lg-4 mb-4 mx-auto">
+        <div class="card shadow-lg p-1 mb-4 bg-white rounded h-100" style="width: 18rem;">
+            <div class="card-body bg-{{t.color}} ">
+                <h5 class="card-title "> {{ t.title }} <i class="bi bi-journals"></i></h5>
+                <hr>
+                <div class="d-flex fs-6 fst-italic">
+                    <p>Inicio {{ t.created_at }}</p>
+                    <p>Limite {{ t.due_date }}</p>
+                </div>
+                <hr>
+                <div class="container d-flex justify-content-center">
+                    <a href="{% url 'task_detail' t.id %}" class="btn btn-success">Ver detalle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

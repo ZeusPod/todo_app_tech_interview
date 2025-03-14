@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Detalle de Tarea{% endblock %}
+
+{% block content %}
+    <h2>Detalle de la Tarea</h2>
+    <p><strong>Título:</strong> {{ task.title }}</p>
+    <p><strong>Descripción:</strong> {{ task.description }}</p>
+    <p><strong>Fecha de Creación:</strong> {{ task.created_at }}</p>
+    <p><strong>Fecha de Vencimiento:</strong> {{ task.due_date }}</p>
+    
+    {% if task.completed %}
+        <p><strong>Completada:</strong> Si</p>
+    {% else %}
+        <p><strong>Completada:</strong> No</p>
+    {% endif %}
+    {% if task.city %}
+        <p><strong>Localidad:</strong> {{ task.city }}</p>
+        <p><strong>Temperatura:</strong> {{ temperature }} °C</p>
+        <p><strong>Humedad:</strong> {{ humidity }} %</p>
+        <p><strong>Descripción del Clima:</strong> {{ weather_description }}</p>        
+    {% endif %}
+    <a href="{% url 'task_list' %}" class="btn btn-secondary">Volver a la lista</a>
+    <a href="{% url 'update_task' task.id %}" class="btn btn-primary">Editar</a>
+{% endblock %}
