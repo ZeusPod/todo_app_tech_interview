@@ -65,7 +65,7 @@ def update_task(request, task_id):
 
 
 
-def mark_task_completed(request, task_id):
+def mark_task_completed(task_id):
     task = Task.objects.get(id=task_id)
     task.completed = True
     task.save()
