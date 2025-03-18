@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <h1 class="text-center mt-4 mb-4">Historial de clima de {{ city }}</h1>
+</div>
+
+<div class="row mx-4 mb-4">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Ciudad</th>
+                <th>Fecha</th>
+                <th>acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in city_history %}
+                <tr>
+                    <td>{{ task.task.title }}</td>
+                    <td>{{ task.city }}</td>
+                    <td>{{ task.created_at }}</td>
+                    <td>
+                        <a href="{% url 'task_detail' task.task.id %}" class="btn btn-primary">ver</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

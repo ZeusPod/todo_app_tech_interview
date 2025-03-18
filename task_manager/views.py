@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.views.generic import ListView, DetailView
-from task_manager.models import Task
+from task_manager.models import Task, CityHistory
 from .form import TaskForm
 from utils.weather_api import get_weather
 # Create your views here.
@@ -40,7 +40,9 @@ def create_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
+            task = form.save()
+            if task.city:
+                CityHistory.objects.create(task=task, city=task.city, created_at=task.created_at)
             return redirect('task_list')
     else:
         form = TaskForm()
@@ -70,3 +72,9 @@ def mark_task_completed(task_id):
     task.completed = True
     task.save()
     return redirect('task_manager:task_list')
+
+
+class CityHistoryListView(ListView):
+    model = CityHistory
+    template_name = 'task_manager/history_city.html'
+    context_object_name = 'city_history'

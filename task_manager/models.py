@@ -12,3 +12,9 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
+
+
+class CityHistory(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    city = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
